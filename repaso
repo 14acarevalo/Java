@@ -1,0 +1,22 @@
+
+function llamada() {
+    fetch('ClaseModificarUsuario?op=1')
+    .then(res => res.json())
+    .then(res => pintarResultados(res));
+}
+
+function pintarResultados(datos) {
+    var html = "<table>"; // Inicializamos la variable html con <table>
+    html += "<thead><tr><th>ID</th><th>Nombre</th><th>Apellidos</th><th>Correo Electrónico</th><th>Password</th><th>Fecha de Nacimiento</th><th>DNI</th><th>Nacionalidad</th><th>Ciudad</th><th>Dirección</th><th>Calle</th><th>Teléfono</th><th>Código Postal</th><th>Genero</th><th>saldo</th><th>Editar</th></tr></thead>";
+    html += "<tbody>";
+    for(var i = 0; i < datos.length; i++) { //Este bucle me permitirá listar todos los usuarios que existen en mi base de datos
+        html += "<tr><td>" + datos[i].idUsuario + "</td><td>" + datos[i].nombre + "</td><td>" + datos[i].apellidos + "</td><td>" + datos[i].correoElectronico + "</td><td>" + datos[i].password + "</td><td>" + datos[i].fechaNacimiento + "</td><td>" + datos[i].dni + "</td><td>" + datos[i].nacionalidad + "</td><td>" + datos[i].ciudad + "</td><td>" + datos[i].direccion + "</td><td>" + datos[i].calle + "</td><td>" + datos[i].telefono + "</td><td>" + datos[i].codigoPostal + "</td><td>" + datos[i].saldo + "</td><td>" + datos[i].genero + "</td><td><a href='PagModificarUsuarioDatos.html?idUsuario=" + datos[i].idUsuario + "&op=2'>Editar</a></td></tr>";
+    }
+    html += "</tbody>";
+    html += "</table>";
+    document.getElementById("resultados").innerHTML = html;
+}
+
+window.onload = function() {
+    llamada("ClaseModificarUsuario");
+}
